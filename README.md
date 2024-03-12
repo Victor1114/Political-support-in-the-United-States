@@ -1,9 +1,3 @@
----
-editor_options: 
-  markdown: 
-    wrap: sentence
----
-
 # Political-support-in-the-United-States
 This paper analyzes the Political support in the United States in 2020 with "gender", "race", "age" and "region" as variables.
 
