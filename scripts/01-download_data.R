@@ -22,3 +22,4 @@ ces2020 <-
 
 #### Save data ####
 write_csv(ces2020, "data/raw_data/raw_data.csv")
+

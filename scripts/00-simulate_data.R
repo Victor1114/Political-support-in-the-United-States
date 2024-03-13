@@ -48,3 +48,4 @@ us_political_preferences <- tibble(
 #### Save data ####
 write.csv(us_political_preferences, "data/simulated_data/simulated_data.csv")
 
+
