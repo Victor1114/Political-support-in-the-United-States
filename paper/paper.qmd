@@ -8,6 +8,7 @@ date-format: long
 abstract: "This paper base on 2020 Collaborative Election Study (CES) to analyze the relationship between gender, race, age, census area, and presidential preferences among voters in the 2020 US presidential election.  The research has found that the black population and younger voters is more tend to support Biden,  and the males show more trend to support Trump. The result can provide valuable insights for the presidential candidate team to develop effective policies to increase support."
 format: pdf
 number-sections: False
+toc: TRUE
 bibliography: references.bib
 ---
 
@@ -26,21 +27,21 @@ library(ggplot2)
 
 # 1 Introduction
 
-The quadrennial presidential election is a core component of American politics,which reflects the changes in the political, economic, and social ecology of the United States. From a realistic perspective, the core element of presidential elections is the voters. The differences in ethnicity, education level, religious beliefs, gender and age, as well as in perceptions of values, political consciousness, and attitudes towards exercising political rights, which will all have impacts on the election by  their voting behavior.
+The quadrennial presidential election is a core component of American politics,which reflects the changes in the political, economic, and social ecology of the United States. From a realistic perspective, the core element of presidential elections is the voters. The differences in ethnicity, education level, religious beliefs, gender and age, as well as in perceptions of values, political consciousness, and attitudes towards exercising political rights, which will all have impacts on the election by their voting behavior.
 
 In this paper, we analyzed the relationship between individual characteristics and behavior of voters, which mainly choose gender, age, race, and census area as features. Behavior is represented by the preferences of voters towards candidates, which shows in they support Trump or Biden. Different groups have different concerns and interests, and we attempt to predict who they may vote by using the gender, age, race, and voting area of voters lead to the preferences of groups with different characteristics towards two candidates of election.
 
-The data used in this article is sourced from the 2020 Collaborative Election Study (CES) (@DVN/E9N6PH_2021). Through research, we found that personal characteristics have a significant impact on voter behavior. Specifically, men are more willing to support Trump, black people are more inclined to support Biden, and younger voters have a more pronounced tendency towards Biden. This study can provide valuable insights for the presidential candidate team to develop effective policies to attract voters and increase support.
+In this paper, we analyze data which sourced from the 2020 Collaborative Election Study (CES) (@DVN/E9N6PH_2021) by using the R programming language (@citeR) and the analysis methodology is inspired by the techniques presented in "Telling Stories with Data"(@rohan). Through research, we found that personal characteristics have a significant impact on voter behavior. Specifically, men are more willing to support Trump, black people and younger voters have a more obvious tendency towards Biden. This study offers important insights that can help a presidential candidate's team build effective policies to voters, potentially increasing their support rate and appeal.
 
-In Section 1, we will introduce the research objectives and data used in this article. The second section will provide a detailed introduction and presentation of the data, and conduct visual analysis of the data, focusing on the relationship between four personal characteristics and behavior. In Section 3, a logistic regression model will be established to demonstrate and predict the relationship between individual characteristics and behavior of voters in Russia. Section 4 presents the model results and analyzes them. Section 5 analyzes and introduces the research results and the weaknesses of this article, and explains the next research plan.
+In Section 1, we will introduce the objectives of research and data used in this paper. The second section will provide a detailed introduction and presentation of the data, and conduct visual analysis of the data, which focusing on the relationship between four personal features and behavior. In Section 3, a regression model will be established to demonstrate and predict the relationship between individual features and behavior of voters in presidential election of US . Section 4 presents the model results and analyzes them. Section 5 analyzes and introduces the research results and the weaknesses of this paper, and explains the next plan for research.
 
 # 2 Data
 
 ## 2.1 Data Description and Methodology
 
-The data used in this article is from the 2020 Collaborative Election Study (CES) and can be publicly obtained through the Harvard University Data Center (@DVN/E9N6PH_2021). Cooperative Election Study (CES) is a long-standing annual survey of American political opinion that primarily examines how Americans perceive Congress, election experiences, voting behavior, and more. In 2020, a total of 60 teams participated in the cooperative election research. Each team purchased a national sample survey of 1000 people, and a total of 61000 respondents completed the post election survey. The samples were selected through Internet sampling, and the method used was mainly based on matching. Ansolabehre, Schaffner and Luks (@Guideto2020CES) introduced this in detail.
+The data used in this paper is from the 2020 Collaborative Election Study (CES) and can be publicly obtained through the Harvard University Data Center (@DVN/E9N6PH_2021). Cooperative Election Study (CES) is a long-standing annual survey of American political opinion that primarily examines how Americans perceive Congress, election experiences, voting behavior, and more. In 2020, a total of 60 teams participated in the cooperative election research. Each team purchased a national sample survey of 1000 people, and a total of 61000 respondents completed the post election survey. The samples were selected through Internet sampling, and the method used was mainly based on matching. Ansolabehre, Schaffner and Luks (@Guideto2020CES) introduced this in detail.
 
-This article will use 5 data variables, namely voting behavior, gender, age, race, and census area. In the actual use process, the voters who voted for Trump and Biden were first selected and the original data was processed.
+This paper will use 5 data variables, namely voting behavior, gender, age, race, and census area. In the actual use process, the voters who voted for Trump and Biden were first selected and the original data was processed.
 
 ```{r Import the data}
 #| include: false
@@ -55,17 +56,17 @@ knitr::kable(ces2020[1:10,], align="l", caption="A summary table of cleaned data
 
 Table 1 presents the cleaned dataset, which includes 5 variables and 43553 observations. The meanings of variables in the dataset are as follows:
 
-- Voted for: support Trump or support Biden.
+-   Voted for: support Trump or support Biden.
 
-- Gender: Male or female.
+-   Gender: Male or female.
 
-- Race: Divided into four categories: White, Black, Hispanic, Asian, and Other.
+-   Race: Divided into four categories: White, Black, Hispanic, Asian, and Other.
 
-- Birthyr: The age of voters in 2020, divided into four categories: 18-29, 30-44, 45-64, and>64.
+-   Birthyr: The age of voters in 2020, divided into four categories: 18-29, 30-44, 45-64, and\>64.
 
-- Region: Census reagion divided into Northeast, Midwest, South, and West.
+-   Region: Census reagion divided into Northeast, Midwest, South, and West.
 
-This article mainly uses programming software R (@citeR) and other tools for data processing, visualization, and modeling analysis, such as "knit" [@knit], "here" [@here], "modelsummary" [@modelsummary], "tidyverse" [@tidyverse], "rstanarm"(@rstanarm).
+This paper mainly uses programming software R (@citeR) and other tools for data processing, visualization, and modeling analysis, such as "knit" [@knit], "here" [@here], "modelsummary" [@modelsummary], "tidyverse" [@tidyverse], "rstanarm"(@rstanarm).
 
 ## 2.2 Data Visualization
 
@@ -208,45 +209,19 @@ ces2020 |>
 
 After visual exploratory analysis of the data, we found that gender, age, race, and census area all have a certain impact on voter voting behavior, indicating a potential relationship between these four variables and voter behavior. To further analyze the impact of these variables on voter behavior, a logistic regression model was established, with the following model form:
 
-$$y_{i}|\pi_{i} \sim Bern(\pi_{i})$$
-$$logit(\pi_{i}) = \beta_{0}+\beta_{1}*gender_{i} + \beta_{2}*race_{i} + \beta_{3}*birthyr_{i}+ \beta_{4}*region_{i}$$
-$$\beta_{i} \sim Normal(0,2.5)\ \  (i=0,1,2,3,4)$$
+$$y_{i}|\pi_{i} \sim Bern(\pi_{i})$$ $$logit(\pi_{i}) = \beta_{0}+\beta_{1}*gender_{i} + \beta_{2}*race_{i} + \beta_{3}*birthyr_{i}+ \beta_{4}*region_{i}$$ $$\beta_{i} \sim Normal(0,2.5)\ \  (i=0,1,2,3,4)$$
 
 where:
 
-- $y_{i}$ is the presidential preference of voter i, supporting either Trump or Biden.
+-   $y_{i}$ is the presidential preference of voter i, supporting either Trump or Biden.
 
-- $\pi_{i}$ is the probability that voter i will vote for Trump.
+-   $\pi_{i}$ is the probability that voter i will vote for Trump.
 
-- $\beta_{0}$ is intercept.
+-   $\beta_{0}$ is intercept.
 
-- $\beta_{i} \ \ (i=1,2,3,4)$ is the slope coefficient.
+-   $\beta_{i} \ \ (i=1,2,3,4)$ is the slope coefficient.
 
 The independent variables of the model, gender, race, birth, and region, are all categorical variables, while the dependent variable is the presidential preference of voters, that is, whether they support Trump or Biden, which is also a categorical variable.
-
-```{r model}
-#| include: false
-#| warning: false
-#| message: false
-#| echo: false
-set.seed(853)
-
-political_preferences <-
-  stan_glm(
-    factor(voted_for) ~ gender + race + age + region,
-    data = ces2020,
-    family = binomial(link = "logit"),
-    prior = normal(location = 0, scale = 2.5, autoscale = TRUE),
-    prior_intercept =
-      normal(location = 0, scale = 2.5, autoscale = TRUE),
-    seed = 853
-  )
-
-saveRDS(
-  political_preferences,
-  file = "political_preferences.rds"
-)
-```
 
 # 4 Results
 
@@ -255,18 +230,20 @@ saveRDS(
 #| echo: false
 #| warning: false
 #| message: false
-political_preferences <-
-  readRDS(file = "political_preferences.rds")
+library(rstanarm)
+
+first_model <-
+  readRDS(file = here::here("models/first_model.rds"))
 
 modelsummary(
   list(
-    "Support Trump" = political_preferences
+    "Support Trump" = first_model
   ),
   statistic = "mad"
   )
 ```
 
-Table 2 presents the predictive variable coefficients of the logistic regression model, and these variables in the model have p-values less than 0.1, indicating a significant impact on voters' presidential preferences. The results show that men are more likely to support Trump. From a racial perspective, black people are more inclined to support Biden, while people of other races are more inclined to support Trump. From an age perspective, people of all age groups are more inclined to support Biden, but the older they get, the weaker this tendency becomes. From the census area, people in the South region tend to support Trump, while others are more inclined to support Biden.
+Table 2 presents the predictive variable coefficients of the logistic regression model, and these variables in the model have p-values less than 0.1, which indicating a significant impact on voters' presidential preferences. The results show that men are more likely to support Trump. From a racial perspective, black people are more tend to support Biden, while people of other races are more likely to support Trump. From an age perspective, people of all age groups are more inclined to support Biden, but the older they are bein, the weaker this tendency becomes. From the census area, people in the South region tend to support Trump, while others are more inclined to support Biden.
 
 # 5 Discussion
 
@@ -284,19 +261,19 @@ Our research findings indicate that the black population is more likely to suppo
 
 From an age perspective, younger voters are more likely to support Biden and have a more pronounced bias. As the younger generation, the millennials and Generation Z are very concerned about topics such as climate change, racial discrimination, and economic inequality, and hope that the government can come up with more solutions. The agenda proposed by the Democratic Party can address the concerns of the younger generation, especially the economic needs. Trump's anti immigration remarks and support for white supremacism further push young voters to lean towards the Democratic Party.
 
-Trump's campaign slogan "Let America be great again" caters to the elderly population that has been around since the 1950s, and he has repeatedly promised not to touch the money of social security and healthcare, which is the most concerning issue for the elderly. Therefore, in terms of age structure, the younger group is more inclined to support Biden, while the older group has relatively higher support for Trump.
+Trump's campaign slogan "Make America Great And Glorious Again"(@Yahoo_News)caters to the elderly population that has been around since the 1950s, and he has repeatedly promised not to touch the money of social security and healthcare, which is the most concerning issue for the elderly. Therefore, in terms of age structure, the younger group is more inclined to support Biden, while the older group has relatively higher support for Trump.
 
 ## 5.4 Weaknesses and Next Steps
 
-This article analyzes the relationship between four personal characteristics of voters: gender, age, race, census area, and presidential preferences. Although some connections were discovered through data visualization and modeling analysis, providing valuable clues, there are also certain limitations.
+This paper analyzes the relationship between four personal characteristics of voters: gender, age, race, census area, and presidential preferences. Although some connections were discovered through data visualization and modeling analysis, providing valuable clues and there are also certain limitations.
 
-On the one hand, the data used in this study was sampled and selected through the Internet, which means that the sample does not include people who cannot access the internet. This group of people may have a certain impact on the analysis results. Another convenience is that the research in this article is to some extent limited by the time of data collection, and the preferences of voters will change with the times and policies. At the same time, 2020 is during the epidemic period, which is a relatively special historical background. Therefore, the results of this study have certain time limitations. In future research, it is planned to integrate multiple institutional survey datasets and expand the timeline of election related data to improve data diversity and enhance the validity of the study.
+On the one hand, the data used in this study was sampled and selected through the Internet, which means that the sample does not include people who cannot access the internet. This group of people may have a certain impact on the analysis results which be a bias. Another convenience is that the research in this article is to some extent limited by the time of data collection, and the preferences of voters will change with the times and policies. At the same time, 2020 is during the epidemic period, which is a relatively special historical background. Therefore, the results of this study have certain time limitations. In future research, it is planned to integrate multiple institutional survey datasets and expand the timeline of election related data to improve data diversity and enhance the validity of the study.
 
 \newpage
 
 \appendix
 
-# Appendix {-}
+# Appendix {.unnumbered}
 
 ## A.1 Sketches
 
@@ -304,7 +281,7 @@ Sketches of the main data and graphs are available in the GitHub Repository asso
 
 ## A.2 Simulation
 
-A script containing data simulation is available in the CitHub Repository associated with thisreport. This script was generated using the programming software R (@citeR) and the  tidyverse [@tidyverse] packages.
+A script containing data simulation is available in the CitHub Repository associated with thisreport. This script was generated using the programming software R (@citeR) and the tidyverse [@tidyverse] packages.
 
 ## A.3 Tests
 
