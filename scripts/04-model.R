@@ -18,20 +18,18 @@ analysis_data <- read_csv("data/analysis_data/analysis_data.csv")
 ### Model data ####
 political_preferences <-
   stan_glm(
-    voted_for ~ gender + education,
-    data = analysis_data,
+    factor(voted_for) ~ gender + race + age + region,
+    data = ces2020,
     family = binomial(link = "logit"),
     prior = normal(location = 0, scale = 2.5, autoscale = TRUE),
-    prior_intercept = 
+    prior_intercept =
       normal(location = 0, scale = 2.5, autoscale = TRUE),
     seed = 853
   )
 
-prior_summary(first_model)
-
 #### Save model ####
 saveRDS(
-  first_model,
+  political_preferences,
   file = "models/first_model.rds"
 )
 
