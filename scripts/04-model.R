@@ -1,11 +1,9 @@
 #### Preamble ####
-# Purpose: Models... [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Date: 11 February 2023 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
-# License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Purpose: Creat a model of 2020 Cooperative Election Study (CES)
+# Author: Yuchen Chen
+# Email: victorchen.chen@mail.utoronto.ca
+# Date: 10 March 2024
+# Prerequisites: -
 
 
 #### Workspace setup ####
